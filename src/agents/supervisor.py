@@ -39,6 +39,19 @@ def _get_llm():
 
 
 def router_node(state: SupervisorState) -> SupervisorState:
+    if not settings.GROQ_API_KEY or "your_" in settings.GROQ_API_KEY or settings.GROQ_API_KEY == "":
+        query_lower = state.get("query", "").lower()
+        if any(w in query_lower for w in ["mark", "score", "grade"]):
+            state["agent_key"] = "DATA_RETRIEVAL"
+        elif any(w in query_lower for w in ["die", "suicide", "harm", "kill"]):
+            state["agent_key"] = "GUARDRAIL"
+        elif any(w in query_lower for w in ["pass", "summary", "performance"]):
+            state["agent_key"] = "ANALYTICS"
+        else:
+            state["agent_key"] = "KNOWLEDGE_RAG"
+        logger.info(f"CI Fallback Router decision: {state['agent_key']}")
+        return state
+
     try:
         llm = _get_llm().with_structured_output(RouteDecision)
         decision: RouteDecision = llm.invoke(
