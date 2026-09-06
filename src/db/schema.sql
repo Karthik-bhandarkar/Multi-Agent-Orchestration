@@ -1,5 +1,9 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS marks;
+DROP TABLE IF EXISTS subjects;
+DROP TABLE IF EXISTS students;
+
 CREATE TABLE IF NOT EXISTS students (
     student_id INTEGER PRIMARY KEY AUTOINCREMENT,
     roll_no    TEXT UNIQUE NOT NULL,

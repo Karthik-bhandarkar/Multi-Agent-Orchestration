@@ -29,7 +29,7 @@ Prior to designing the production architecture, experimental prototypes and NLP/
 | G2 | CI/CD & Containerization | ✅ DONE | `.github/workflows/ci.yml`, `.github/workflows/cd.yml`, `tests/test_placeholder.py`, `api/app.py`, `Dockerfile`, `docker-compose.yml`, Render Cloud Service |
 | G3 | Logging, Exceptions & Config | ✅ DONE | `src/utils/logger.py`, `src/utils/exception.py`, `src/core/config.py` |
 | G4 | DSA - LRU Cache | ✅ DONE | `src/core/lru_cache.py`, `tests/test_dsa_cache.py` |
-| G5 | SQL Database Layer | ⬜ PENDING | `src/db/schema.sql`, `src/db/connection.py`, `src/db/student_repository.py` do not exist yet |
+| G5 | SQL Database Layer | ✅ DONE | `src/db/schema.sql`, `src/db/init_db.py`, `src/db/student_repository.py`, `tests/test_sql_engine.py` |
 | G6 | Security Tools | ⬜ PENDING | `src/tools/guardrails.py`, `src/tools/sanitizer.py` do not exist yet |
 | G7 | RAG Pipeline | ⬜ PENDING | `src/rag/vector_store.py`, `src/rag/embeddings.py` do not exist yet (`data/faiss_index/.gitkeep` exists) |
 | G8 | OOP Multi-Agent Architecture | ⬜ PENDING | Agent module files in `src/agents/` do not exist yet |
@@ -132,16 +132,17 @@ flake8>=7.1.0
 black>=24.4.2
 ```
 
-## 6. DATABASE SCHEMA STATE
-- `src/db/schema.sql`: Does not exist yet.
-- `data/edupulse.db`: Does not exist yet.
+## 6. DATABASE SCHEMA STATE & BENCHMARK LEDGER
+- `src/db/schema.sql`: Exists (tables `students`, `subjects`, `marks` + indexes)
+- `data/edupulse.db`: Generated SQLite database (git-ignored)
+- **SQL Relational Query Latency:** `0.282 ms` (Target <5.0 ms) ✅
 
 ## 7. TEST SUITE STATE
-- `tests/` directory contents: `tests/__init__.py`, `tests/test_placeholder.py`, `tests/test_dsa_cache.py`
+- `tests/` directory contents: `tests/__init__.py`, `tests/test_placeholder.py`, `tests/test_dsa_cache.py`, `tests/test_sql_engine.py`
 - Command executed: `pytest tests/ -v -s`
 - Execution output:
 ```text
-collected 9 items
+collected 19 items
 
 tests/test_dsa_cache.py::TestLRUCacheBasics::test_put_and_get PASSED
 tests/test_dsa_cache.py::TestLRUCacheBasics::test_missing_key_returns_none PASSED
@@ -151,11 +152,23 @@ tests/test_dsa_cache.py::TestLRUEviction::test_get_promotes_to_mru PASSED
 tests/test_dsa_cache.py::TestLRUEviction::test_capacity_one PASSED
 tests/test_dsa_cache.py::TestLRUEviction::test_invalid_capacity_raises PASSED
 tests/test_dsa_cache.py::TestLRUPerformance::test_o1_benchmark 
-[BENCHMARK] LRU avg per-op time: 0.00028 ms
+[BENCHMARK] LRU avg per-op time: 0.00029 ms
 PASSED
 tests/test_placeholder.py::test_placeholder PASSED
+tests/test_sql_engine.py::TestStudentQueries::test_get_marks_valid_roll_no PASSED
+tests/test_sql_engine.py::TestStudentQueries::test_get_marks_invalid_roll_no_returns_empty PASSED
+tests/test_sql_engine.py::TestStudentQueries::test_get_summary_pass_status PASSED
+tests/test_sql_engine.py::TestStudentQueries::test_get_summary_fail_status PASSED
+tests/test_sql_engine.py::TestStudentQueries::test_student_exists PASSED
+tests/test_sql_engine.py::TestSQLInjectionSafety::test_injection_attempt_returns_empty PASSED
+tests/test_sql_engine.py::TestSQLInjectionSafety::test_injection_drop_table_attempt PASSED
+tests/test_sql_engine.py::TestConnectionLifecycle::test_connection_closes_after_context PASSED
+tests/test_sql_engine.py::TestConnectionLifecycle::test_rollback_on_exception PASSED
+tests/test_sql_engine.py::TestPerformance::test_query_latency_under_5ms 
+[BENCHMARK] SQL query latency: 0.282 ms
+PASSED
 
-============================== 9 passed in 0.02s ==============================
+============================== 19 passed in 0.11s ==============================
 ```
 
 ## 8. API ENDPOINTS (if api/app.py exists)
