@@ -1,5 +1,5 @@
 # EduPulse AI — PROJECT STATE SNAPSHOT
-Last Updated: 2026-09-07 (Group 3, Micro-Phase 3.1 Completed)
+Last Updated: 2026-09-07 (Group 3 Completed: Logging, Exceptions & Config)
 
 ## 0. PROJECT IDENTITY & FOUNDATIONAL RESEARCH BASE
 - Repo: `https://github.com/Karthik-bhandarkar/Multi-Agent-Orchestration.git`
@@ -8,16 +8,16 @@ Last Updated: 2026-09-07 (Group 3, Micro-Phase 3.1 Completed)
 - Import root: `src` (`find_packages(include=["src", "src.*"])`)
 
 ### Foundational Research & Notebook Prototypes (Phase 0 - Learning Base)
-Prior to designing the production architecture, experimental prototypes and NLP/LLM models were researched and validated in the following local Jupyter notebooks (`intern/` directory):
+Prior to designing the production architecture, experimental prototypes and NLP/LLM models were researched and validated in local Jupyter notebooks (`notebooks/` directory):
 
-1. **`BERT.ipynb`** — Exploratory Bidirectional Encoder Representations from Transformers architecture setup.
-2. **`BERT_classification.ipynb`** — Sequence classification fine-tuning for intent routing at the system gateway.
-3. **`Maksed_Bert.ipynb`** — Masked Language Modeling (MLM) token prediction for input validation.
-4. **`BERT Maksked Model.ipynb`** — Custom tokenizer and token masking optimization for sub-15ms local edge guardrails.
-5. **`RAG_Document_Uploader_System.ipynb`** — End-to-end document parsing, semantic text-splitting, and FAISS vector index ingestion.
-6. **`LLM_Basic_RAG_Implementation.ipynb`** — Retrieval-Augmented Generation query pipeline connecting vector embeddings to LLM prompts.
-7. **`LangChain_Simple_IO_Operations.ipynb`** — Baseline LCEL (LangChain Expression Language) prompt templates and single-turn latency metrics.
-8. **`Agent Function Call`** — Dynamic JSON schema tool-calling, Pydantic parameter binding, and multi-turn state checkpointers.
+1. **`01_BERT_Architecture.ipynb`** — Exploratory Bidirectional Encoder Representations from Transformers architecture setup.
+2. **`02_BERT_Classification.ipynb`** — Sequence classification fine-tuning for intent routing at the system gateway.
+3. **`03_Masked_BERT.ipynb`** — Masked Language Modeling (MLM) token prediction for input validation.
+4. **`04_BERT_Masked_Model.ipynb`** — Custom tokenizer and token masking optimization for sub-15ms local edge guardrails.
+5. **`01_RAG_Document_Uploader.ipynb`** — End-to-end document parsing, semantic text-splitting, and FAISS vector index ingestion.
+6. **`02_LLM_Basic_RAG_Implementation.ipynb`** — Retrieval-Augmented Generation query pipeline connecting vector embeddings to LLM prompts.
+7. **`01_LangChain_Simple_IO_Operations.ipynb` & `.py`** — Baseline LCEL prompt templates and single-turn latency metrics.
+8. **`02_Agent_Function_Call.ipynb`** — Dynamic JSON schema tool-calling, Pydantic parameter binding, and multi-turn state checkpointers.
 
 ---
 
@@ -27,7 +27,7 @@ Prior to designing the production architecture, experimental prototypes and NLP/
 |-------|-------|--------|--------------------------|
 | G1 | Environment & Packaging | ✅ DONE | `setup.py`, `requirements.txt`, `.env`, `.env.example`, `.gitignore`, `LICENSE`, `src/`, `api/`, `tests/`, `ui/`, `data/`, `logs/` |
 | G2 | CI/CD & Containerization | ✅ DONE | `.github/workflows/ci.yml`, `.github/workflows/cd.yml`, `tests/test_placeholder.py`, `api/app.py`, `Dockerfile`, `docker-compose.yml`, Render Cloud Service |
-| G3 | Logging, Exceptions & Config | 🔄 IN PROGRESS (3.1 Complete) | `src/utils/logger.py` |
+| G3 | Logging, Exceptions & Config | ✅ DONE | `src/utils/logger.py`, `src/utils/exception.py`, `src/core/config.py` |
 | G4 | DSA - LRU Cache | ⬜ PENDING | `src/core/lru_cache.py` does not exist yet |
 | G5 | SQL Database Layer | ⬜ PENDING | `src/db/schema.sql`, `src/db/connection.py`, `src/db/student_repository.py` do not exist yet |
 | G6 | Security Tools | ⬜ PENDING | `src/tools/guardrails.py`, `src/tools/sanitizer.py` do not exist yet |
@@ -40,9 +40,9 @@ Prior to designing the production architecture, experimental prototypes and NLP/
 
 | File Path | Purpose (inferred from actual code/docstrings) | Lines of Code |
 |-----------|--------------------------------------------------|-----------------|
-| `.env` | Local environment variable definitions | 4 |
-| `.env.example` | Environment configuration template | 4 |
-| `.gitignore` | Version control ignore rules for bytecode, caches, venv, logs, secrets, memory.md, intern/, and DBs | 58 |
+| `.env` | Local environment variable definitions | 6 |
+| `.env.example` | Environment configuration template | 6 |
+| `.gitignore` | Version control ignore rules for bytecode, caches, venv, logs, secrets, memory.md, intern/, *.mp4, and DBs | 60 |
 | `docker-compose.yml` | Container orchestration service specification with volume mappings and port binding | 18 |
 | `Dockerfile` | Multi-stage production container build (Builder + Runtime edupulse user) | 29 |
 | `LICENSE` | MIT License agreement | 21 |
@@ -57,10 +57,12 @@ Prior to designing the production architecture, experimental prototypes and NLP/
 | `src/__init__.py` | Root source package initialization file | 0 |
 | `src/agents/__init__.py` | Agents module package initialization file | 0 |
 | `src/core/__init__.py` | Core module package initialization file | 0 |
+| `src/core/config.py` | Pydantic BaseSettings configuration manager singleton | 24 |
 | `src/db/__init__.py` | Database module package initialization file | 0 |
 | `src/rag/__init__.py` | RAG module package initialization file | 0 |
 | `src/tools/__init__.py` | Tools module package initialization file | 0 |
 | `src/utils/__init__.py` | Utilities module package initialization file | 0 |
+| `src/utils/exception.py` | CustomException error wrapper preserving full traceback details | 28 |
 | `src/utils/logger.py` | Centralized rotating file and stream logger utility | 41 |
 | `tests/__init__.py` | Test suite package initialization file | 0 |
 | `tests/test_placeholder.py` | Placeholder test function ensuring green CI execution | 4 |
@@ -73,6 +75,8 @@ Prior to designing the production architecture, experimental prototypes and NLP/
 | `api/app.py` | `app = FastAPI(title="EduPulse AI Backend", version="0.1.0")` | Uvicorn / Docker CMD (`api.app:app`), Render deploy |
 | `api/app.py` | `@app.get("/health") def health():` | Health check probes |
 | `src/utils/logger.py` | `def get_logger(name: str) -> logging.Logger:` | All core, DB, agent, RAG, and API modules |
+| `src/utils/exception.py` | `class CustomException(Exception): def __init__(self, error: Exception, error_detail: sys):` | DB repositories, RAG engines, tools, agents, API routes |
+| `src/core/config.py` | `class Settings(BaseSettings):` singleton `settings` | All system components requiring GROQ_API_KEY, DB_PATH, etc. |
 | `docker-compose.yml` | Service `backend` mapping `8000:8000`, env_file `.env`, volumes `./data:/app/data`, `./logs:/app/logs` | Docker Compose CLI |
 | `tests/test_placeholder.py` | `def test_placeholder():` | `pytest` test runner |
 | `.github/workflows/ci.yml` | Job `lint-and-test` on `ubuntu-22.04` with `flake8 src/ api/ tests/ --max-line-length=120` | GitHub Actions workflow runner |
@@ -82,10 +86,12 @@ Prior to designing the production architecture, experimental prototypes and NLP/
 
 | Variable Name | Found In File(s) | Default Value (if any, from config.py) |
 |----------------|---------------------|-------------------------------------------|
-| `GROQ_API_KEY` | `.env`, `.env.example`, `.github/workflows/ci.yml` | `your_groq_api_key_here` / `${{ secrets.GROQ_API_KEY }}` |
-| `ENV` | `.env`, `.env.example`, `.github/workflows/ci.yml` | `development` / `test` / `production` |
-| `DB_PATH` | `.env`, `.env.example`, `.github/workflows/ci.yml` | `./data/edupulse.db` / `./data/test_edupulse.db` |
-| `LOG_LEVEL` | `.env`, `.env.example`, `.github/workflows/ci.yml` | `INFO` / `DEBUG` |
+| `GROQ_API_KEY` | `.env`, `.env.example`, `.github/workflows/ci.yml`, `src/core/config.py` | `your_groq_api_key_here` / `""` |
+| `OPENROUTER_API_KEY` | `.env`, `.env.example`, `src/core/config.py` | `sk-or-v1-83c8cd...` / `""` |
+| `GOOGLE_API_KEY` | `.env`, `.env.example`, `src/core/config.py` | `your_google_api_key_here` / `""` |
+| `ENV` | `.env`, `.env.example`, `.github/workflows/ci.yml`, `src/core/config.py` | `development` |
+| `DB_PATH` | `.env`, `.env.example`, `.github/workflows/ci.yml`, `src/core/config.py` | `./data/edupulse.db` |
+| `LOG_LEVEL` | `.env`, `.env.example`, `.github/workflows/ci.yml`, `src/core/config.py` | `INFO` |
 | `RENDER_DEPLOY_HOOK_URL` | `.github/workflows/cd.yml` | `${{ secrets.RENDER_DEPLOY_HOOK_URL }}` |
 
 ## 5. DEPENDENCIES INSTALLED
@@ -163,19 +169,29 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 ├── data/
 │   └── faiss_index/
 │       └── .gitkeep
+├── docs/
+│   ├── architecture/
+│   └── artifacts/
 ├── Internship_artifacts/  [git-ignored]
-├── intern/                [git-ignored - Phase 0 Notebook Prototypes]
+├── intern/                [git-ignored]
 ├── logs/
 │   └── .gitkeep
+├── notebooks/
+│   ├── 01_bert_intent/
+│   ├── 02_rag_pipeline/
+│   └── 03_langchain_agents/
 ├── src/
 │   ├── __init__.py
 │   ├── agents/
 │   ├── core/
+│   │   ├── __init__.py
+│   │   └── config.py
 │   ├── db/
 │   ├── rag/
 │   ├── tools/
 │   └── utils/
 │       ├── __init__.py
+│       ├── exception.py
 │       └── logger.py
 ├── tests/
 │   ├── __init__.py
@@ -184,8 +200,6 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 ```
 
 ## 10. KNOWN GAPS / NOT YET IMPLEMENTED
-- **Micro-Phase 3.2**: Missing `src/utils/exception.py`.
-- **Micro-Phase 3.3**: Missing `src/core/config.py`.
 - **Group 4**: Missing `src/core/lru_cache.py`.
 - **Group 5**: Missing `src/db/schema.sql`, `src/db/connection.py`, `src/db/student_repository.py`.
 - **Group 6**: Missing `src/tools/guardrails.py`, `src/tools/sanitizer.py`.
