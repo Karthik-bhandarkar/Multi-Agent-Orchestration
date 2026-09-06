@@ -36,8 +36,10 @@ jobs:
         if: failure()
         shell: bash
         run: |
+          set -euo pipefail
           echo "========================================================"
           echo "❌ CRITICAL: EduPulse CD Pipeline Deployment Failed!"
+          echo "Commit SHA: ${{ github.sha }}"
           echo "Workflow Run: ${{ github.run_id }}"
           echo "========================================================"
           exit 1
