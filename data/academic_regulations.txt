@@ -1,0 +1,63 @@
+================================================================================
+EDUPULSE AI INSTITUTIONAL ACADEMIC REGULATIONS & GOVERNANCE POLICY MANUAL
+Document Code: EDUPULSE-REG-2026-V1
+================================================================================
+
+SECTION 1: ATTENDANCE REQUIREMENTS AND DETENTION POLICY
+--------------------------------------------------------------------------------
+1.1 Minimum Attendance Requirement:
+What is the minimum attendance requirement? Every registered student must maintain a mandatory minimum attendance percentage of 75% across all lectures, practical laboratory sessions, and tutorial classes in each registered credit course during a semester to be eligible to appear for the End-Semester Examinations.
+
+1.2 Condonation Eligibility Range:
+Students whose cumulative attendance falls between 65.0% and 74.9% in a given course may apply for Condonation of Attendance Shortage strictly on verified medical grounds or due to official institutional representation in national/international academic, sports, or cultural competitions. Condonation is not an automatic right and requires explicit written approval from the Academic Dean following scrutiny.
+
+1.3 Automatic Detention Threshold:
+Any student whose course attendance drops below 65.0% will be automatically classified under 'Detained' status for that specific course. Detained students are strictly barred from appearing in the End-Semester Examination for that course, receive an automatic 'F' grade, and must re-register for the course in a subsequent academic semester when offered.
+
+
+SECTION 2: GRADING SCALE AND ACADEMIC EVALUATION STANDARDS
+--------------------------------------------------------------------------------
+2.1 Ten-Point Grading System:
+EduPulse AI institutes a standardized 10-point absolute grading scale. Student academic performance is mapped to Letter Grades and Grade Points according to the following official criteria:
+
+- Grade 'O' (Outstanding): Marks 90.0% to 100.0% | Grade Points: 10.0
+- Grade 'A+' (Excellent): Marks 80.0% to 89.9% | Grade Points: 9.0
+- Grade 'A' (Very Good): Marks 70.0% to 79.9% | Grade Points: 8.0
+- Grade 'B+' (Good): Marks 60.0% to 69.9% | Grade Points: 7.0
+- Grade 'B' (Above Average): Marks 55.0% to 59.9% | Grade Points: 6.0
+- Grade 'C' (Average): Marks 50.0% to 54.9% | Grade Points: 5.0
+- Grade 'P' (Pass): Marks 40.0% to 49.9% | Grade Points: 4.0
+- Grade 'F' (Fail): Marks Below 40.0% | Grade Points: 0.0
+
+2.2 Pass and Fail Cutoff Threshold:
+To earn course credits and secure a passing grade ('P' or higher), a student must achieve a minimum aggregate score of 40.0% (combining internal continuous assessment and end-semester examination marks). Any total score below 40.0% results in an 'F' grade.
+
+
+SECTION 3: CONDONATION APPLICATION PROCEDURE AND GUIDELINES
+--------------------------------------------------------------------------------
+3.1 Mandatory Documentation:
+Applications requesting attendance condonation must be accompanied by authentic documentation:
+a) Medical Condonation: Official medical certificates issued and signed by a registered medical practitioner (holding MBBS degree or higher) along with hospital admission/discharge summaries and prescription receipts.
+b) Duty Condonation: Official Duty Certificates issued by the Director of Physical Education or Cultural Event Convener verifying participation in recognized institutional delegations.
+
+3.2 Application Submission Deadline:
+All condonation applications, along with supporting verified documents, must be submitted to the Office of the Academic Dean at least 10 working days prior to the announced start date of the End-Semester Examinations. Late applications received after this deadline will be rejected without review.
+
+
+SECTION 4: CREDIT TRANSFER AND ACADEMIC MOBILITY POLICY
+--------------------------------------------------------------------------------
+4.1 External Credit Transfer Eligibility:
+Students enrolled in EduPulse AI programs may transfer credits earned through approved online learning platforms (such as NPTEL, SWAYAM, Coursera) or recognized partner universities, subject to prior written approval from the departmental Board of Studies (BoS).
+
+4.2 Maximum Transferable Credit Cap:
+A maximum of 20.0% of the total degree program credit requirements may be satisfied via external credit transfers. Transferred courses will be reflected on the academic transcript as 'Pass' status and will not be included in the calculation of Semester Grade Point Average (SGPA) or Cumulative Grade Point Average (CGPA).
+
+
+SECTION 5: EXAMINATION, RE-EVALUATION, AND SUPPLEMENTARY RULES
+--------------------------------------------------------------------------------
+5.1 Re-Evaluation Request Window and Processing Fee:
+A student who wishes to request answer script re-evaluation or retotaling for an end-semester examination must submit a formal application within 14 calendar days from the official date of result declaration. A non-refundable re-evaluation processing fee of INR 500 per subject is applicable.
+
+5.2 Supplementary Examination Rules:
+Supplementary examinations are conducted within 30 calendar days following the announcement of regular end-semester results. Students who have secured an 'F' grade in a maximum of 3 subjects in the preceding semester are eligible to register for supplementary examinations to clear their backlog.
+================================================================================
