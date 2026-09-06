@@ -1,5 +1,5 @@
 # EduPulse AI — PROJECT STATE SNAPSHOT
-Last Updated: 2026-09-06 (Group 2, Micro-Phase 2.1 Completed)
+Last Updated: 2026-09-06 (Group 2, Micro-Phase 2.2 Completed)
 
 ## 0. PROJECT IDENTITY
 - Repo: `https://github.com/Karthik-bhandarkar/Multi-Agent-Orchestration.git`
@@ -12,14 +12,14 @@ Last Updated: 2026-09-06 (Group 2, Micro-Phase 2.1 Completed)
 | Group | Theme | Status | Evidence (files found) |
 |-------|-------|--------|--------------------------|
 | G1 | Environment & Packaging | ✅ DONE | `setup.py`, `requirements.txt`, `.env`, `.env.example`, `.gitignore`, `LICENSE`, `src/`, `api/`, `tests/`, `ui/`, `data/`, `logs/` |
-| G2 | CI/CD & Containerization | 🔄 IN PROGRESS (2.1 Complete) | `.github/workflows/ci.yml`, `tests/test_placeholder.py` |
+| G2 | CI/CD & Containerization | 🔄 IN PROGRESS (2.1 & 2.2 Complete) | `.github/workflows/ci.yml`, `tests/test_placeholder.py`, `api/app.py`, `Dockerfile` |
 | G3 | Logging, Exceptions & Config | ⬜ PENDING | `src/utils/logger.py`, `src/utils/exceptions.py`, `src/core/config.py` do not exist yet |
 | G4 | DSA - LRU Cache | ⬜ PENDING | `src/core/lru_cache.py` does not exist yet |
 | G5 | SQL Database Layer | ⬜ PENDING | `src/db/schema.sql`, `src/db/connection.py`, `src/db/student_repository.py` do not exist yet |
 | G6 | Security Tools | ⬜ PENDING | `src/tools/guardrails.py`, `src/tools/sanitizer.py` do not exist yet |
 | G7 | RAG Pipeline | ⬜ PENDING | `src/rag/vector_store.py`, `src/rag/embeddings.py` do not exist yet (`data/faiss_index/.gitkeep` exists) |
 | G8 | OOP Multi-Agent Architecture | ⬜ PENDING | Agent module files in `src/agents/` do not exist yet |
-| G9 | FastAPI Service Layer | ⬜ PENDING | `api/app.py`, `api/routes.py` do not exist yet |
+| G9 | FastAPI Service Layer | ⬜ PENDING | Full service layer routes in `api/routes.py` do not exist yet (`api/app.py` `/health` baseline exists) |
 | G10 | Testing, UI, Docs, Final Verification | ⬜ PENDING | No UI implementation in `ui/` |
 
 ## 2. COMPLETE FILE INVENTORY
@@ -28,13 +28,14 @@ Last Updated: 2026-09-06 (Group 2, Micro-Phase 2.1 Completed)
 |-----------|--------------------------------------------------|-----------------|
 | `.env` | Local environment variable definitions | 4 |
 | `.env.example` | Environment configuration template | 4 |
-| `.gitignore` | Version control ignore rules for bytecode, caches, venv, logs, secrets, and DBs | 52 |
+| `.gitignore` | Version control ignore rules for bytecode, caches, venv, logs, secrets, memory.md, and DBs | 55 |
+| `Dockerfile` | Multi-stage production container build (Builder + Runtime edupulse user) | 29 |
 | `LICENSE` | MIT License agreement | 21 |
-| `memory.md` | Persistent session log of all executed commands, file edits, and phase status | 26 |
 | `requirements.txt` | Project dependencies (LangChain, LangGraph, PyTorch, FastAPI, Streamlit, etc.) | 32 |
 | `setup.py` | Python packaging script defining package name, version, and structure | 12 |
 | `.github/workflows/ci.yml` | GitHub Actions CI workflow for linting and test execution | 37 |
 | `api/__init__.py` | API package initialization file | 0 |
+| `api/app.py` | FastAPI backend entrypoint defining baseline GET /health endpoint | 8 |
 | `data/faiss_index/.gitkeep` | Directory marker for FAISS index persistence | 0 |
 | `logs/.gitkeep` | Directory marker for application logs persistence | 0 |
 | `src/__init__.py` | Root source package initialization file | 0 |
@@ -52,6 +53,8 @@ Last Updated: 2026-09-06 (Group 2, Micro-Phase 2.1 Completed)
 | File | Exact Signature (copied from actual code) | Imported By (search codebase for actual import statements) |
 |------|----------------------------------------------|------------------------------------------------------------|
 | `setup.py` | `setup(name="edupulse-ai", version="0.1.0", description="EduPulse AI - Enterprise Multi-Agent Educational Governance System", author="<your-name>", packages=find_packages(include=["src", "src.*"]), python_requires=">=3.10", install_requires=[], include_package_data=True)` | N/A (Build / Packaging script) |
+| `api/app.py` | `app = FastAPI(title="EduPulse AI Backend", version="0.1.0")` | Uvicorn / Docker CMD (`api.app:app`), Render deploy |
+| `api/app.py` | `@app.get("/health") def health():` | Health check probes |
 | `tests/test_placeholder.py` | `def test_placeholder():` | `pytest` test runner |
 | `.github/workflows/ci.yml` | Job `lint-and-test` on `ubuntu-22.04` with `flake8 src/ api/ tests/ --max-line-length=120` | GitHub Actions workflow runner |
 
@@ -115,7 +118,7 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 ```
 
 ## 8. API ENDPOINTS (if api/app.py exists)
-`api/app.py` does not exist yet. No API endpoints defined.
+- `GET /health` (`def health()`) -> `{"status": "HEALTHY"}`
 
 ## 9. FULL CURRENT FOLDER STRUCTURE
 ```text
@@ -123,8 +126,8 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 ├── .env
 ├── .env.example
 ├── .gitignore
+├── Dockerfile
 ├── LICENSE
-├── memory.md
 ├── PROJECT_STATE.md
 ├── requirements.txt
 ├── setup.py
@@ -132,7 +135,8 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 │   └── workflows/
 │       └── ci.yml
 ├── api/
-│   └── __init__.py
+│   ├── __init__.py
+│   └── app.py
 ├── data/
 │   └── faiss_index/
 │       └── .gitkeep
@@ -154,7 +158,6 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 ```
 
 ## 10. KNOWN GAPS / NOT YET IMPLEMENTED
-- **Micro-Phase 2.2**: Missing `Dockerfile` & `api/app.py`.
 - **Micro-Phase 2.3**: Missing `docker-compose.yml`.
 - **Micro-Phase 2.4**: Missing Render web service setup.
 - **Micro-Phase 2.5**: Missing `.github/workflows/cd.yml`.
@@ -164,8 +167,8 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 - **Group 6**: Missing `src/tools/guardrails.py`, `src/tools/sanitizer.py`.
 - **Group 7**: Missing `src/rag/vector_store.py`, `src/rag/embeddings.py`.
 - **Group 8**: Missing Multi-Agent architecture files in `src/agents/`.
-- **Group 9**: Missing FastAPI application endpoints in `api/app.py` & `api/routes.py`.
+- **Group 9**: Missing full endpoint routes in `api/routes.py`.
 - **Group 10**: Missing full unit test suites and Streamlit UI in `ui/`.
 
 ## 11. DEVIATIONS FROM ORIGINAL PLAN
-- `requirements.txt` version constraints were updated to use `>=` instead of exact `==` pins to allow `pip` to pull PyTorch `2.6.0+` for Python 3.13 wheel compatibility on Windows.
+- `memory.md` added to `.gitignore` so local memory tracking does not get pushed to GitHub.
