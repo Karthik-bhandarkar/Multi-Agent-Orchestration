@@ -1,11 +1,25 @@
 # EduPulse AI — PROJECT STATE SNAPSHOT
 Last Updated: 2026-09-07 (Group 3, Micro-Phase 3.1 Completed)
 
-## 0. PROJECT IDENTITY
+## 0. PROJECT IDENTITY & FOUNDATIONAL RESEARCH BASE
 - Repo: `https://github.com/Karthik-bhandarkar/Multi-Agent-Orchestration.git`
 - Python Version: `>=3.10` (Targeted in `setup.py`, running Python 3.13)
 - Package name: `edupulse-ai` (from `setup.py`)
 - Import root: `src` (`find_packages(include=["src", "src.*"])`)
+
+### Foundational Research & Notebook Prototypes (Phase 0 - Learning Base)
+Prior to designing the production architecture, experimental prototypes and NLP/LLM models were researched and validated in the following local Jupyter notebooks (`intern/` directory):
+
+1. **`BERT.ipynb`** — Exploratory Bidirectional Encoder Representations from Transformers architecture setup.
+2. **`BERT_classification.ipynb`** — Sequence classification fine-tuning for intent routing at the system gateway.
+3. **`Maksed_Bert.ipynb`** — Masked Language Modeling (MLM) token prediction for input validation.
+4. **`BERT Maksked Model.ipynb`** — Custom tokenizer and token masking optimization for sub-15ms local edge guardrails.
+5. **`RAG_Document_Uploader_System.ipynb`** — End-to-end document parsing, semantic text-splitting, and FAISS vector index ingestion.
+6. **`LLM_Basic_RAG_Implementation.ipynb`** — Retrieval-Augmented Generation query pipeline connecting vector embeddings to LLM prompts.
+7. **`LangChain_Simple_IO_Operations.ipynb`** — Baseline LCEL (LangChain Expression Language) prompt templates and single-turn latency metrics.
+8. **`Agent Function Call`** — Dynamic JSON schema tool-calling, Pydantic parameter binding, and multi-turn state checkpointers.
+
+---
 
 ## 1. GROUP COMPLETION STATUS
 
@@ -28,13 +42,13 @@ Last Updated: 2026-09-07 (Group 3, Micro-Phase 3.1 Completed)
 |-----------|--------------------------------------------------|-----------------|
 | `.env` | Local environment variable definitions | 4 |
 | `.env.example` | Environment configuration template | 4 |
-| `.gitignore` | Version control ignore rules for bytecode, caches, venv, logs, secrets, memory.md, and DBs | 55 |
+| `.gitignore` | Version control ignore rules for bytecode, caches, venv, logs, secrets, memory.md, intern/, and DBs | 58 |
 | `docker-compose.yml` | Container orchestration service specification with volume mappings and port binding | 18 |
 | `Dockerfile` | Multi-stage production container build (Builder + Runtime edupulse user) | 29 |
 | `LICENSE` | MIT License agreement | 21 |
 | `requirements.txt` | Project dependencies (LangChain, LangGraph, PyTorch, FastAPI, Streamlit, etc.) | 32 |
 | `setup.py` | Python packaging script defining package name, version, and structure | 12 |
-| `.github/workflows/cd.yml` | GitHub Actions CD workflow triggering Render deployment hook upon successful CI build | 21 |
+| `.github/workflows/cd.yml` | GitHub Actions CD workflow triggering Render deployment hook upon successful CI build | 25 |
 | `.github/workflows/ci.yml` | GitHub Actions CI workflow for linting and test execution | 37 |
 | `api/__init__.py` | API package initialization file | 0 |
 | `api/app.py` | FastAPI backend entrypoint defining baseline GET /health endpoint | 8 |
@@ -149,7 +163,8 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 ├── data/
 │   └── faiss_index/
 │       └── .gitkeep
-├── Internship_artifacts/
+├── Internship_artifacts/  [git-ignored]
+├── intern/                [git-ignored - Phase 0 Notebook Prototypes]
 ├── logs/
 │   └── .gitkeep
 ├── src/
@@ -180,4 +195,4 @@ tests/test_placeholder.py::test_placeholder PASSED                       [100%]
 - **Group 10**: Missing full unit test suites and Streamlit UI in `ui/`.
 
 ## 11. DEVIATIONS FROM ORIGINAL PLAN
-- `memory.md` added to `.gitignore` so local memory tracking does not get pushed to GitHub.
+- `memory.md` & `intern/` added to `.gitignore` so local memory tracking and exploratory research notebooks remain local.

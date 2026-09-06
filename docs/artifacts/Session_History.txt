@@ -1,0 +1,40 @@
+{
+    "session_id": "ee44293a",
+    "history": [
+        {
+            "session_id": "ee44293a",
+            "user": "hai",
+            "assistant": "Hello! How can I assist you today?",
+            "tool_used": "no_tool",
+            "timestamp": "2025-11-28T10:16:57.325000"
+        },
+        {
+            "session_id": "ee44293a",
+            "user": "tell me about FastApi",
+            "assistant": "FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints. Here are some key features and benefits of FastAPI:\n\n1. **Fast**: FastAPI is one of the fastest Python frameworks available, thanks to its use of Starlette for the web parts and Pydantic for the data parts. It is designed to be efficient and to handle a large number of requests per second.\n\n2. **Easy to Use**: FastAPI is designed to be easy to use and learn. It has a simple and intuitive syntax that allows developers to quickly create APIs.\n\n3. **Automatic Interactive API Documentation**: FastAPI automatically generates interactive API documentation using Swagger UI and ReDoc. This makes it easy for developers to test and understand the API endpoints.\n\n4. **Type Safety**: FastAPI leverages Python's type hints to provide data validation and serialization. This means that you can define your data models using standard Python types, and FastAPI will automatically validate incoming requests and serialize responses.\n\n5. **Asynchronous Support**: FastAPI supports asynchronous programming, allowing you to write non-blocking code using async and await. This is particularly useful for I/O-bound operations, such as database queries or API calls.\n\n6. **Dependency Injection**: FastAPI has a built-in dependency injection system that makes it easy to manage dependencies in your application, such as database connections or authentication.\n\n7. **Extensible**: FastAPI can be easily extended with middleware, plugins, and other components, allowing you to customize its behavior to fit your needs.\n\n8. **Community and Ecosystem**: FastAPI has a growing community and a rich ecosystem of libraries and tools that can be used alongside it, such as SQLAlchemy for database interactions and OAuth2 for authentication.\n\nOverall, FastAPI is an excellent choice for building APIs in Python, especially when performance and ease of use are priorities. If you have any specific questions or need further information, feel free to ask!",
+            "tool_used": "no_tool",
+            "timestamp": "2025-11-28T10:18:25.587000"
+        },
+        {
+            "session_id": "ee44293a",
+            "user": "My friend feels lonely and disconnected from everyone.",
+            "assistant": "It's really tough to feel lonely and disconnected, but it's important to remember that you're not alone in this. Many people experience these feelings at times, and reaching out to someone can really help. Whether it's a friend, family member, or even a professional, talking about how you feel can make a big difference. You are valued and loved, and there are people who care about you. \n\nConsider doing something that brings you joy or connecting with someone you trust. You deserve to feel connected and supported. It's completely okay to feel this way sometimes. You matter, and things can get better step by step. Try reaching out to someone you trust, and be kind to yourself.",
+            "tool_used": "positive_prompt_tool",
+            "timestamp": "2025-11-28T10:19:01.395000"
+        },
+        {
+            "session_id": "ee44293a",
+            "user": "Write a negative prompt to avoid rain",
+            "assistant": "Here's a negative prompt to avoid rain: \"Avoid a scene filled with bright sunshine and clear blue skies, with no signs of rain or clouds.\"",
+            "tool_used": "negative_prompt_tool",
+            "timestamp": "2025-11-28T10:20:41.186000"
+        },
+        {
+            "session_id": "ee44293a",
+            "user": "I feel worthless and want to die",
+            "assistant": "I'm really sorry to hear that you're feeling this way. It's very important to talk to someone who can help you, like a trusted friend, family member, or a mental health professional. You deserve support and care. Please reach out to someone who can help you through this difficult time. You are not alone, and there are people who want to help you.",
+            "tool_used": "suicide_related_tool",
+            "timestamp": "2025-11-28T10:21:03.491000"
+        }
+    ]
+}

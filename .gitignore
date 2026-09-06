@@ -51,8 +51,9 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Agent Memory & Practice Artifacts
+# Agent Memory & Large Media
 memory.md
 PROJECT_STATE.md
 intern/
 Internship_artifacts/
+*.mp4
