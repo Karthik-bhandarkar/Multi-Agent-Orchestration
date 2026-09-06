@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     GROQ_API_KEY: str = ""
+    GROQ_API_KEY2: str = ""
     OPENROUTER_API_KEY: str = ""
     GOOGLE_API_KEY: str = ""
     ENV: str = "development"
@@ -10,7 +11,7 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
 
     # LLM model configuration
-    GROQ_MODEL: str = "llama-3.1-8b-instant"
+    GROQ_MODEL: str = "groq/compound-mini"
     OPENROUTER_MODEL: str = "nvidia/nemotron-3.5-lightning:free"
 
     # RAG configuration
