@@ -2,6 +2,7 @@ import time
 import sys
 from typing import Any, Dict, Optional
 from src.agents.base_agent import BaseAgent, AgentResult
+from src.agents.agent_factory import AgentFactory
 from src.tools.marks_tool import student_marks_tool
 from src.rag.vector_store import VectorStore
 from src.db.student_repository import StudentRepository
@@ -156,8 +157,6 @@ class CriticalGuardrailAgent(BaseAgent):
 
 
 # ============ FACTORY REGISTRATION (module load time) ============
-from src.agents.agent_factory import AgentFactory
-
 AgentFactory.register("DATA_RETRIEVAL", DataRetrievalAgent)
 AgentFactory.register("KNOWLEDGE_RAG", KnowledgeRAGAgent)
 AgentFactory.register("ANALYTICS", AnalyticsReportAgent)

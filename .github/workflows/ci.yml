@@ -49,6 +49,8 @@ jobs:
           LOG_LEVEL: DEBUG
         run: |
           set -euo pipefail
+          python -m src.db.init_db
+          python -m src.rag.vector_store
           pytest tests/ -v --tb=short
 
       - name: Handle CI Failure & Alert

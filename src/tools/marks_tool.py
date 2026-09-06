@@ -39,7 +39,10 @@ def student_marks_tool(roll_no: str) -> str:
         status = summary.get("status", "FAIL")
 
         marks_detail = "\n".join(
-            [f"  - {item['subject']}: {item['score']}/100 (Attendance: {item['attendance_percentage']}%)" for item in marks_list]
+            [
+                f"  - {item['subject']}: {item['score']}/100 (Attendance: {item['attendance_percentage']}%)"
+                for item in marks_list
+            ]
         )
 
         result_str = (
