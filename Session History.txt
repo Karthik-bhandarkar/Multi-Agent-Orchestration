@@ -16,3 +16,9 @@ Q: test
 A: I couldn't find a confident answer in the academic policy documents.
 Agent: KNOWLEDGE_RAG
 
+
+--- Session pytest_session_4 reset at 2026-09-07T03:48:12.116400 ---
+Q: test
+A: I couldn't find a confident answer in the academic policy documents.
+Agent: KNOWLEDGE_RAG
+
