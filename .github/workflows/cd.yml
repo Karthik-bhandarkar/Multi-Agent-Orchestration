@@ -13,8 +13,15 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Trigger Render Deploy Hook
+        env:
+          HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+          if [ -n "$HOOK_URL" ]; then
+            curl -f -s -S -X POST "$HOOK_URL"
+            echo "Render deployment hook triggered successfully."
+          else
+            echo "WARNING: RENDER_DEPLOY_HOOK_URL secret is not configured in GitHub Repository Secrets. Skipping trigger."
+          fi
 
-      - name: Confirm deploy triggered
-        run: echo "Render deployment triggered successfully."
+      - name: Confirm deploy status
+        run: echo "EduPulse CD Pipeline execution finished."
