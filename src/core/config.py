@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
 
     # LLM model configuration
-    GROQ_MODEL: str = "groq/compound-mini"
+    GROQ_MODEL: str = "openai/gpt-oss-20b"
     OPENROUTER_MODEL: str = "nvidia/nemotron-3.5-lightning:free"
 
     # RAG configuration
