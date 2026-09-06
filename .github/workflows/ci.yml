@@ -8,6 +8,7 @@ on:
 
 jobs:
   lint-and-test:
+    name: Code Verification & Automated Testing
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
@@ -25,20 +26,39 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
       - name: Install dependencies
+        shell: bash
         run: |
+          set -euo pipefail
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -e .
 
       - name: Lint with flake8
+        shell: bash
         run: |
+          set -euo pipefail
           flake8 src/ api/ tests/ --max-line-length=120 --extend-ignore=E203,W503
 
       - name: Run pytest suite
+        shell: bash
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           ENV: test
           DB_PATH: ./data/test_edupulse.db
           LOG_LEVEL: DEBUG
         run: |
+          set -euo pipefail
           pytest tests/ -v --tb=short
+
+      - name: Handle CI Failure & Alert
+        if: failure()
+        shell: bash
+        run: |
+          echo "========================================================"
+          echo "❌ CRITICAL: EduPulse CI Pipeline Execution Failed!"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Workflow Run: ${{ github.run_id }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "========================================================"
+          exit 1

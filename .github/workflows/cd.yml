@@ -9,13 +9,16 @@ on:
 
 jobs:
   deploy:
+    name: Production Deployment Trigger
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-22.04
     steps:
       - name: Trigger Render Deploy Hook
+        shell: bash
         env:
           HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
+          set -euo pipefail
           if [ -n "$HOOK_URL" ]; then
             curl -f -s -S -X POST "$HOOK_URL"
             echo "Render deployment hook triggered successfully."
@@ -24,4 +27,17 @@ jobs:
           fi
 
       - name: Confirm deploy status
-        run: echo "EduPulse CD Pipeline execution finished."
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "EduPulse CD Pipeline execution finished successfully."
+
+      - name: Handle CD Failure & Alert
+        if: failure()
+        shell: bash
+        run: |
+          echo "========================================================"
+          echo "❌ CRITICAL: EduPulse CD Pipeline Deployment Failed!"
+          echo "Workflow Run: ${{ github.run_id }}"
+          echo "========================================================"
+          exit 1
