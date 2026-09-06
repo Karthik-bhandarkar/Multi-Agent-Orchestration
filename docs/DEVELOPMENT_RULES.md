@@ -114,7 +114,12 @@ All Git commit messages must strictly adhere to the Conventional Commits specifi
 - Maximum 72 characters for the subject line.
 - Do **NOT** end the subject line with a period.
 - Do **NOT** use vague terms like `update file`, `fix bug`, `changes`, or `wip`.
-- Be specific about technical/business impact.
-- If a body is necessary, separate it with a blank line and explain *why* the change was made.
+---
+
+## 12. Automated Verification, Response Fine-Tuning & Model Selection Protocol
+- **Mandatory Automated Self-Testing Every Phase:** Run automated verification scripts (`pytest`, `flake8`, and custom runner scripts exporting formatted JSON output files) after implementing every single micro-phase. Analyze test execution results directly.
+- **Empirical Output Response Fine-Tuning:** Inspect all JSON response outputs and fine-tune code logic, prompt templates, and system parameters to ensure high accuracy and zero false responses based strictly on empirical evidence.
+- **API Key & Model Selection Protocol:** Whenever a new API key is required or an LLM/embedding model yields suboptimal responses, explicitly request the required key from the user or benchmark and recommend superior models (e.g. OpenRouter, Groq, Google Gemini), reporting all performance findings to the user.
+
 
 
