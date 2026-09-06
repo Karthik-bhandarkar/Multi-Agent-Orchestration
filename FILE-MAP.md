@@ -48,6 +48,7 @@ Status: LIVE — Updated after every file creation or modification.
 | [`tests/conftest.py`](file:///c:/MindForge/Project/Agent%20Orchestration%20Framework%20with%20Lang%20Chain/tests/conftest.py) | Shared pytest configuration & fixtures | Provides session-scoped `initialize_test_database()` fixture for unit tests | `initialize_test_database()` | Created shared test fixture module |
 | [`ui/streamlit_app.py`](file:///c:/MindForge/Project/Agent%20Orchestration%20Framework%20with%20Lang%20Chain/ui/streamlit_app.py) | Streamlit governance web dashboard | Interactive web UI with agent badges, DB inspector, reset session button, and crisis banner | Header & Layout | Implemented full Streamlit frontend application |
 | [`README.md`](file:///c:/MindForge/Project/Agent%20Orchestration%20Framework%20with%20Lang%20Chain/README.md) | Project master documentation & benchmark ledger | Complete system documentation with architecture diagrams, API specs, setup guide, and empirical benchmarks | Table of Contents | Created comprehensive project documentation |
+| [`scripts/chat_cli.py`](file:///c:/MindForge/Project/Agent%20Orchestration%20Framework%20with%20Lang%20Chain/scripts/chat_cli.py) | Interactive CLI chat runner | Provides interactive terminal chat interface with real-time agent badge and latency logging | `start_cli_chat()` | Created interactive terminal chat runner |
 
 
 
