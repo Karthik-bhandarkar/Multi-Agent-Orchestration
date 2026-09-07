@@ -49,6 +49,12 @@ def health():
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
+    global supervisor_graph
+
+    # Defensive guard: initialize graph if startup_event was not triggered (e.g. during pytest)
+    if supervisor_graph is None:
+        supervisor_graph = build_graph()
+
     start = time.perf_counter()
 
     # 1. Tier-1 Deterministic Guardrail Check (Sub-5ms Bypass)

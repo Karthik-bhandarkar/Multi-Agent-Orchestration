@@ -1,6 +1,20 @@
 import time
+import pytest
 from fastapi.testclient import TestClient
 from api.app import app
+
+
+@pytest.fixture(scope="session", autouse=True)
+def startup_app():
+    """
+    Explicitly trigger FastAPI startup events before any test runs.
+    TestClient does NOT fire startup events by default, leaving
+    supervisor_graph = None and causing NoneType.invoke() crashes.
+    """
+    for handler in app.router.on_startup:
+        handler()
+    yield
+
 
 client = TestClient(app)
 
