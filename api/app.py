@@ -20,13 +20,15 @@ logger = get_logger(__name__)
 app = FastAPI(title="EduPulse AI Backend", version="0.1.0")
 
 session_cache = LRUCache(capacity=settings.LRU_CACHE_CAPACITY)
-supervisor_graph = build_graph()
+supervisor_graph = None  # Initialized in startup_event to avoid eager memory allocation
 SESSION_LOG_FILE = "Session History.txt"
 
 
 @app.on_event("startup")
 def startup_event():
+    global supervisor_graph
     initialize_database()
+    supervisor_graph = build_graph()
     logger.info("EduPulse backend startup complete: DB ready, graph compiled, cache initialized.")
 
 

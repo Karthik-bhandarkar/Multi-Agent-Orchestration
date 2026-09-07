@@ -2,7 +2,6 @@ import os
 import sys
 import pickle
 import faiss
-from sentence_transformers import SentenceTransformer
 from src.core.config import settings
 from src.utils.logger import get_logger
 from src.utils.exception import CustomException
@@ -13,10 +12,19 @@ logger = get_logger(__name__)
 class VectorStore:
     def __init__(self, model_name: str = None):
         self.model_name = model_name or settings.EMBEDDING_MODEL
-        self.model = SentenceTransformer(self.model_name)
+        self._model = None  # Lazy-loaded on first use to avoid 400MB RAM spike at startup
         self.index = None
         self.chunks: list[str] = []
         self.index_dir = settings.FAISS_INDEX_DIR
+
+    @property
+    def model(self):
+        """Lazy-load SentenceTransformer only when first needed (saves ~400MB at startup)."""
+        if self._model is None:
+            from sentence_transformers import SentenceTransformer
+            logger.info(f"Lazy-loading embedding model: {self.model_name}")
+            self._model = SentenceTransformer(self.model_name)
+        return self._model
 
     def _chunk_text(self, text: str, chunk_size: int = 100, overlap: float = 0.20) -> list[str]:
         words = text.split()
